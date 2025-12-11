@@ -1,0 +1,94 @@
+/**
+ * Responsive Design Styles
+ * Mobile-first approach with breakpoints
+ */
+
+/* Mobile: Base styles (default) */
+@media (max-width: 640px) {
+  /* Chat Page Responsive */
+  .chat-page-container {
+    flex-direction: column;
+  }
+
+  /* Header adjustments */
+  header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Hide center icons on mobile */
+  .header-icons-container {
+    display: none;
+  }
+
+  /* Chat area padding */
+  .chat-area {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Message input adjustments */
+  .message-input-container {
+    padding: 0.75rem;
+  }
+
+  /* App menu positioning */
+  .app-menu-overlay {
+    right: 1rem;
+    width: calc(100% - 2rem);
+    max-width: 20rem;
+  }
+}
+
+/* Tablet: 641px - 1024px */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Sidebar width adjustment */
+  .sidebar {
+    width: 16rem;
+  }
+
+  /* Chat area padding */
+  .chat-area {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Desktop: 1025px and above */
+@media (min-width: 1025px) {
+  /* Full desktop layout */
+  .sidebar {
+    width: 18rem;
+  }
+
+  .chat-area {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Large screens: 1440px and above */
+@media (min-width: 1440px) {
+  .chat-area {
+    max-width: 48rem;
+  }
+}
+
+/* Prevent text size adjustment on iOS */
+@media screen and (max-width: 640px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Touch-friendly targets */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  .cursor-pointer {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+

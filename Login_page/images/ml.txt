@@ -1,0 +1,213 @@
+
+This React code replicates the UI from the second image (the active chat interface). It uses Tailwind CSS for styling and Lucide React for the icons.
+
+Prerequisites
+To run this, you need a React project set up with Tailwind CSS and lucide-react.
+
+Bash
+
+npm install lucide-react
+
+
+
+import React, { useState } from 'react';
+import { 
+  Plus, 
+  MoreHorizontal, 
+  Pencil, 
+  Trash2, 
+  LayoutGrid, 
+  ChevronDown, 
+  MessageSquare, 
+  Share2, 
+  Mail, 
+  Link as LinkIcon,
+  Palette,
+  Tent,
+  ChefHat,
+  Heart,
+  Scale,
+  Users,
+  Handshake
+} from 'lucide-react';
+
+const ToaiInterface = () => {
+  // Mock State for UI demonstration
+  const [activeTab, setActiveTab] = useState('Vacation Planner');
+  const [showAppMenu, setShowAppMenu] = useState(true);
+
+  return (
+    <div className="flex h-screen bg-white font-sans text-gray-800 overflow-hidden">
+      
+      {/* LEFT SIDEBAR */}
+      <aside className="w-72 bg-gray-50 flex flex-col border-r border-gray-200">
+        
+        {/* Logo Area */}
+        <div className="p-6">
+          <h1 className="text-2xl font-bold text-black tracking-tight">TOAI</h1>
+        </div>
+
+        {/* Knowledge Base Section */}
+        <div className="px-4 mb-6">
+          <div className="flex justify-between items-center mb-2 px-2">
+            <h2 className="text-sm font-semibold text-gray-900">Knowledge Base</h2>
+            <MoreHorizontal size={16} className="text-gray-400 cursor-pointer" />
+          </div>
+          
+          <ul className="space-y-1">
+            <SidebarItem icon={<Palette size={18}/>} label="Designer" />
+            <SidebarItem 
+              icon={<Tent size={18}/>} 
+              label="Vacation Planner" 
+              active={true} 
+            />
+            <SidebarItem icon={<ChefHat size={18}/>} label="Cooking Assistant" />
+          </ul>
+        </div>
+
+        {/* Recent Chats Section */}
+        <div className="flex-1 overflow-y-auto px-4">
+          <h2 className="text-sm font-semibold text-gray-900 mb-2 px-2">Recent Chats</h2>
+          <div className="space-y-1">
+            <ChatItem label="Give the Negotiation Strategy" time="2m ago" />
+            <ChatItem label="Which Vendor this month has" time="" active={true} />
+            <ChatItem label="What is the Mumbai's Members..." time="2m ago" />
+            <ChatItem label="What is the Delhi's Membership..." time="2m ago" />
+            <ChatItem label="What is the Mumbai's Members..." time="2m ago" />
+            <ChatItem label="What if Blue Services Give 5% O..." time="2m ago" />
+            <ChatItem label="Can you tell me December's best" time="2m ago" />
+            <ChatItem label="Can you tell me December's best" time="2m ago" />
+          </div>
+        </div>
+      </aside>
+
+      {/* MAIN CONTENT AREA */}
+      <main className="flex-1 flex flex-col relative">
+        
+        {/* Top Header */}
+        <header className="h-16 border-b border-gray-100 flex items-center justify-between px-8 bg-white z-10">
+          <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-md">
+            <span className="font-semibold text-gray-700">TOAI GPT 7.0</span>
+            <ChevronDown size={18} className="text-gray-500" />
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 text-gray-400 border-r border-gray-200 pr-4">
+              <MessageSquare size={20} className="hover:text-gray-600 cursor-pointer" />
+              <Mail size={20} className="hover:text-gray-600 cursor-pointer" />
+              <LinkIcon size={20} className="hover:text-gray-600 cursor-pointer" />
+              <Pencil size={18} className="hover:text-gray-600 cursor-pointer" />
+            </div>
+            
+            {/* App Switcher & Profile */}
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => setShowAppMenu(!showAppMenu)}
+                className={`p-2 rounded-full hover:bg-gray-100 ${showAppMenu ? 'bg-gray-100' : ''}`}
+              >
+                <LayoutGrid size={20} className="text-gray-600" />
+              </button>
+              <div className="h-8 w-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-medium text-sm">
+                M
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Chat Scroll Area */}
+        <div className="flex-1 overflow-y-auto px-16 py-8 relative">
+          
+          {/* FLOATING APP MENU (Replicating the screenshot overlay) */}
+          {showAppMenu && (
+            <div className="absolute top-4 right-8 bg-white shadow-xl border border-gray-100 rounded-xl p-6 w-80 z-50 grid grid-cols-3 gap-6 animate-in fade-in zoom-in-95 duration-200">
+              <AppMenuItem icon={<Heart className="text-red-400" />} label="Health" />
+              <AppMenuItem icon={<Scale className="text-blue-500" />} label="Legal" />
+              <AppMenuItem icon={<Users className="text-purple-500" />} label="HRMS" />
+              <AppMenuItem icon={<Handshake className="text-green-500" />} label="Vendor Negotiation" />
+            </div>
+          )}
+
+          {/* Chat Content */}
+          <div className="max-w-3xl mx-auto space-y-8 pb-20">
+            
+            {/* AI Previous Context */}
+            <div className="text-gray-800 leading-relaxed">
+              <p className="mb-4">sheep are rare, real animals that people own as status symbols. Owning one is seen as a sign of empathy and a connection to the natural world.</p>
+              <ol className="list-decimal pl-5 space-y-2">
+                <li>The book never definitively answers the question of whether androids dream or not. It explores the nature of reality, consciousness, and what it means to be human.</li>
+                <li>The book inspired the movie Blade Runner, though there are some key differences in plot.</li>
+              </ol>
+            </div>
+
+            {/* User Message */}
+            <div className="flex justify-end">
+              <div className="bg-blue-50 text-gray-800 px-5 py-3 rounded-lg max-w-xl">
+                do androids truly dream of electric sheeps or not?
+              </div>
+            </div>
+
+            {/* AI Response */}
+            <div className="text-gray-800 leading-relaxed">
+              <p className="mb-4">The question of whether androids dream of electric sheep is the title and central theme of the science fiction novel <em>Do Androids Dream of Electric Sheep?</em> by Philip K. Dick.</p>
+              
+              <ol className="list-decimal pl-5 space-y-4">
+                <li>
+                  The book explores a world where androids are indistinguishable from humans except for a lack of empathy. The story follows Rick Deckard, a bounty hunter who tracks down rogue androids.
+                </li>
+                <li>
+                  The title refers to the empathy test used to distinguish between humans and androids. The test involves administering a fictional scenario and evaluating the subject's emotional response. Electric sheep are rare, real animals that people own as status symbols. Owning one is seen as a sign of empathy and a connection to the natural world.
+                </li>
+                <li>
+                   The book never definitively answers the question of whether androids dream or not. It explores the nature of reality, consciousness, and what it means to be human.
+                </li>
+                <li>
+                  The book inspired the movie Blade Runner, though there are some key differences in plot.
+                </li>
+              </ol>
+            </div>
+
+          </div>
+        </div>
+
+      </main>
+    </div>
+  );
+};
+
+// --- Helper Components for Cleanliness ---
+
+const SidebarItem = ({ icon, label, active = false }) => (
+  <li className={`flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer group ${active ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-600 hover:bg-gray-100'}`}>
+    <span className={`${active ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600'}`}>
+      {icon}
+    </span>
+    <span className="text-sm truncate">{label}</span>
+  </li>
+);
+
+const ChatItem = ({ label, time, active = false }) => (
+  <div className={`group flex items-center justify-between px-3 py-2 rounded-md cursor-pointer ${active ? 'bg-blue-50' : 'hover:bg-gray-100'}`}>
+    <div className="flex-1 min-w-0">
+      <p className={`text-sm truncate ${active ? 'text-gray-900 font-medium' : 'text-gray-600'}`}>{label}</p>
+      {time && <p className="text-xs text-gray-400 mt-0.5">{time}</p>}
+    </div>
+    {active && (
+      <div className="flex items-center gap-2 pl-2">
+        <Pencil size={14} className="text-gray-400 hover:text-blue-600" />
+        <Trash2 size={14} className="text-gray-400 hover:text-red-500" />
+        <MoreHorizontal size={14} className="text-gray-400" />
+      </div>
+    )}
+  </div>
+);
+
+const AppMenuItem = ({ icon, label }) => (
+  <div className="flex flex-col items-center gap-2 cursor-pointer group">
+    <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+      {icon}
+    </div>
+    <span className="text-xs font-medium text-gray-600 text-center leading-tight">{label}</span>
+  </div>
+);
+
+export default ToaiInterface;

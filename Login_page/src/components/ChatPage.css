@@ -1,0 +1,51 @@
+@import "../styles.css";
+@import "../styles/responsive.css";
+
+/* Prevent icon scaling on zoom */
+header .flex.items-center.gap-4 > div {
+  flex-shrink: 0 !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+}
+
+header .flex.items-center.gap-4 svg,
+header .flex.items-center.gap-4 img {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  flex-shrink: 0 !important;
+  transform: scale(1) !important;
+  zoom: 1 !important;
+}
+
+header .flex.items-center.gap-4 > div:last-child svg,
+header .flex.items-center.gap-4 > div:last-child img {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+}
+
+header .flex.items-center.gap-4 .absolute {
+  width: 6px !important;
+  height: 6px !important;
+  min-width: 6px !important;
+  min-height: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  /* Mobile sidebar toggle can be added here */
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    transition: left 0.3s ease;
+    z-index: 50;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+}
