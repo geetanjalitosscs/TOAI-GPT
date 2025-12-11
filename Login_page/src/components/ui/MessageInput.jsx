@@ -3,6 +3,10 @@ import { Paperclip, Mic, ArrowUp } from 'lucide-react'
 /**
  * MessageInput Component
  * Reusable message input field with icons
+ * Follows MVC pattern:
+ * - Model: None (stateless component)
+ * - View: UI rendering (input field with icons)
+ * - Controller: None (stateless component)
  */
 const MessageInput = () => (
   <div className="bg-white border-t border-gray-200 py-4 z-20 message-input-container">

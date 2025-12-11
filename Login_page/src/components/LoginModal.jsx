@@ -1,9 +1,14 @@
 import { useState } from 'react'
+import { X } from 'lucide-react'
 import { loginUser, signupUser } from '../services/authService'
 
 /**
  * LoginModal Component
  * Authentication modal for login and signup
+ * Follows MVC pattern:
+ * - Model: State management (email, password, isSignup, error, loading)
+ * - View: UI rendering (form, buttons, inputs)
+ * - Controller: Event handlers (handleSubmit, handleSocialLogin, etc.)
  * @param {boolean} isOpen - Whether modal is open
  * @param {function} onClose - Close handler
  * @param {function} onSuccessRedirect - Success redirect handler
@@ -21,6 +26,8 @@ function LoginModal({ isOpen, onClose, onSuccessRedirect }) {
   // Controller: Event handlers
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!email || !password) return
+    
     setError('')
     setLoading(true)
 
@@ -52,8 +59,18 @@ function LoginModal({ isOpen, onClose, onSuccessRedirect }) {
 
   // View: UI rendering
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay">
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        {/* Close Button */}
+        <button
+          type="button"
+          className="modal-close"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          <X size={20} />
+        </button>
+
         <h1 className="modal-title">Log in or sign up</h1>
         <p className="modal-description">
           You'll get smarter responses and can upload files, images, and more.
@@ -88,60 +105,79 @@ function LoginModal({ isOpen, onClose, onSuccessRedirect }) {
           <button
             type="button"
             className="social-button"
+            onClick={() => handleSocialLogin('Microsoft')}
+          >
+            <svg className="social-icon" viewBox="0 0 24 24" width="20" height="20">
+              <path fill="#F25022" d="M1 1h10v10H1z" />
+              <path fill="#00A4EF" d="M13 1h10v10H13z" />
+              <path fill="#7FBA00" d="M1 13h10v10H1z" />
+              <path fill="#FFB900" d="M13 13h10v10H13z" />
+            </svg>
+            Continue with Microsoft
+          </button>
+
+          <button
+            type="button"
+            className="social-button"
             onClick={handlePhoneLogin}
           >
             <svg className="social-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
               <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
             </svg>
-            Continue with Phone
+            Continue with phone
           </button>
         </div>
 
         <div className="divider">
-          <span>OR</span>
+          <span className="divider-text">OR</span>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
+            <label htmlFor="email" className="form-label">Email address</label>
             <input
+              id="email"
               type="email"
-              placeholder="Email"
+              placeholder=""
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="form-input"
+              className="form-input email-input"
             />
           </div>
+
           <div className="form-group">
+            <label htmlFor="password" className="form-label">Password</label>
             <input
+              id="password"
               type="password"
-              placeholder="Password"
+              placeholder=""
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="form-input"
+              className="form-input email-input"
             />
           </div>
 
           {error && <div className="error-message">{error}</div>}
 
-          <button type="submit" className="submit-button" disabled={loading}>
+          <button type="submit" className="continue-button" disabled={loading}>
             {loading ? 'Loading...' : isSignup ? 'Sign up' : 'Log in'}
           </button>
-        </form>
 
-        <div className="auth-footer">
-          <button
-            type="button"
-            className="toggle-auth"
-            onClick={() => {
-              setIsSignup(!isSignup)
-              setError('')
-            }}
-          >
-            {isSignup ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
-          </button>
-        </div>
+          <div className="auth-footer">
+            <button
+              type="button"
+              className="toggle-auth"
+              onClick={() => {
+                setIsSignup(!isSignup)
+                setError('')
+              }}
+            >
+              {isSignup ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   )

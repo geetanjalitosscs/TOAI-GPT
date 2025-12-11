@@ -3,7 +3,6 @@ import Sidebar from './layout/Sidebar'
 import Header from './layout/Header'
 import ChatArea from './layout/ChatArea'
 import MessageInput from './ui/MessageInput'
-import './ChatPage.css'
 
 /**
  * ChatPage Component
@@ -17,14 +16,34 @@ const ChatPage = () => {
   // Model: State management
   const [activeTab, setActiveTab] = useState('Vacation Planner')
   const [showAppMenu, setShowAppMenu] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
+  // Controller: Event handlers
+  const handleToggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen)
+  }
+
+  const handleCloseSidebar = () => {
+    setSidebarOpen(false)
+  }
+
+  // View: UI rendering
   return (
     <div className="flex h-screen bg-white font-sans text-gray-800 overflow-hidden chat-page-container">
       {/* View: Layout Components */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isOpen={sidebarOpen}
+        onClose={handleCloseSidebar}
+      />
       
       <main className="flex-1 flex flex-col relative min-w-0 overflow-hidden">
-        <Header showAppMenu={showAppMenu} setShowAppMenu={setShowAppMenu} />
+        <Header
+          showAppMenu={showAppMenu}
+          setShowAppMenu={setShowAppMenu}
+          onToggleSidebar={handleToggleSidebar}
+        />
         <ChatArea showAppMenu={showAppMenu} />
         <MessageInput />
       </main>

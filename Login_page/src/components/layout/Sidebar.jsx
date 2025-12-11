@@ -5,10 +5,17 @@ import ChatItem from '../ui/ChatItem'
 /**
  * Sidebar Component
  * Left sidebar with navigation and chat history
+ * Follows MVC pattern:
+ * - Model: Data (knowledgeBaseItems, recentChats)
+ * - View: UI rendering
+ * - Controller: Props (activeTab, setActiveTab, isOpen, onClose)
  * @param {string} activeTab - Currently active tab
  * @param {function} setActiveTab - Function to set active tab
+ * @param {boolean} isOpen - Whether sidebar is open (for mobile)
+ * @param {function} onClose - Function to close sidebar (for mobile)
  */
-const Sidebar = ({ activeTab, setActiveTab }) => {
+const Sidebar = ({ activeTab, setActiveTab, isOpen = false, onClose }) => {
+  // Model: Data
   const knowledgeBaseItems = [
     { icon: <Palette size={18} />, label: 'Designer' },
     { icon: <Tent size={18} />, label: 'Vacation Planner' },
@@ -26,8 +33,31 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     { label: "Can you tell me December's best", time: '2m ago' },
   ]
 
+  // Controller: Handle item click (close sidebar on mobile)
+  const handleItemClick = (callback) => {
+    if (callback) callback()
+    // Close sidebar on mobile after selection
+    if (window.innerWidth < 768 && onClose) {
+      onClose()
+    }
+  }
+
+  // View: UI rendering
   return (
-    <aside className="w-72 bg-gray-50 flex flex-col border-r border-gray-200 hidden md:flex flex-shrink-0">
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
+      <aside
+        className={`w-72 bg-gray-50 flex flex-col border-r border-gray-200 flex-shrink-0 sidebar ${
+          isOpen ? 'open' : ''
+        }`}
+      >
       {/* Logo Area */}
       <div className="p-6">
         <h1 className="text-2xl font-bold text-black tracking-tight">TOAI</h1>
@@ -47,7 +77,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
               icon={item.icon}
               label={item.label}
               active={activeTab === item.label}
-              onClick={() => setActiveTab(item.label)}
+              onClick={() => handleItemClick(() => setActiveTab(item.label))}
             />
           ))}
         </ul>
@@ -84,6 +114,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         </div>
       </div>
     </aside>
+    </>
   )
 }
 

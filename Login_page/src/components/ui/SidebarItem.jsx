@@ -1,6 +1,10 @@
 /**
  * SidebarItem Component
  * Reusable sidebar navigation item
+ * Follows MVC pattern:
+ * - Model: Props (icon, label, active)
+ * - View: UI rendering (list item)
+ * - Controller: onClick handler
  * @param {ReactNode} icon - Icon element
  * @param {string} label - Item label
  * @param {boolean} active - Whether item is active

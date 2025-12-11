@@ -1,6 +1,10 @@
 /**
  * AppMenuItem Component
  * Reusable app menu item for app switcher
+ * Follows MVC pattern:
+ * - Model: Props (icon, label)
+ * - View: UI rendering (menu item)
+ * - Controller: None (stateless component)
  * @param {ReactNode} icon - Icon element
  * @param {string} label - Item label
  */

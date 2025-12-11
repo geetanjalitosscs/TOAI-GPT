@@ -3,6 +3,10 @@ import { Pencil, Trash2, MoreHorizontal } from 'lucide-react'
 /**
  * ChatItem Component
  * Reusable chat history item
+ * Follows MVC pattern:
+ * - Model: Props (label, time, active)
+ * - View: UI rendering (chat item with actions)
+ * - Controller: None (stateless component)
  * @param {string} label - Chat title
  * @param {string} time - Time ago string
  * @param {boolean} active - Whether chat is active

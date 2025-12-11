@@ -378,8 +378,23 @@ body,
   gap: 16px;
 }
 
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .form-group {
   width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f172a;
+  margin-bottom: 8px;
 }
 
 .email-input {
@@ -462,6 +477,28 @@ body,
 }
 
 .toggle-mode-button:hover {
+  color: #0f172a;
+}
+
+/* Auth Footer */
+.auth-footer {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.toggle-auth {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+  padding: 8px;
+  transition: color 0.2s;
+}
+
+.toggle-auth:hover {
   color: #0f172a;
 }
 

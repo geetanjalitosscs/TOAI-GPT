@@ -4,6 +4,10 @@ import { WhatsAppIcon, GoogleDriveIcon, OracleIcon, SQLDolphinIcon } from '../ic
 /**
  * HeaderIcons Component
  * Reusable header icons row with indicator dots
+ * Follows MVC pattern:
+ * - Model: Icon configuration (iconSize, styles)
+ * - View: UI rendering (icon row with dots)
+ * - Controller: None (stateless component)
  */
 const HeaderIcons = () => {
   const iconSize = 20

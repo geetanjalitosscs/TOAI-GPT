@@ -5,6 +5,10 @@ import { HeartWithPlus } from '../icons/BrandIcons'
 /**
  * ChatArea Component
  * Main chat content area
+ * Follows MVC pattern:
+ * - Model: Props (showAppMenu), appMenuItems data
+ * - View: UI rendering (chat content, app menu)
+ * - Controller: None (presentational component)
  * @param {boolean} showAppMenu - Whether app menu is visible
  */
 const ChatArea = ({ showAppMenu }) => {

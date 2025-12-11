@@ -1,11 +1,47 @@
 /**
  * Responsive Design Styles
  * Mobile-first approach with breakpoints
+ * Centralized responsive styles for all components
  */
 
-/* Mobile: Base styles (default) */
+/* ========== Icon Scaling Prevention ========== */
+/* Prevent icon scaling on zoom - Header icons */
+header .flex.items-center.gap-4 > div {
+  flex-shrink: 0 !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+}
+
+header .flex.items-center.gap-4 svg,
+header .flex.items-center.gap-4 img {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  flex-shrink: 0 !important;
+  transform: scale(1) !important;
+  zoom: 1 !important;
+}
+
+header .flex.items-center.gap-4 > div:last-child svg,
+header .flex.items-center.gap-4 > div:last-child img {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+}
+
+header .flex.items-center.gap-4 .absolute {
+  width: 6px !important;
+  height: 6px !important;
+  min-width: 6px !important;
+  min-height: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ========== Mobile: Base styles (max-width: 640px) ========== */
 @media (max-width: 640px) {
-  /* Chat Page Responsive */
+  /* Chat Page Container */
   .chat-page-container {
     flex-direction: column;
   }
@@ -14,6 +50,8 @@
   header {
     padding-left: 1rem;
     padding-right: 1rem;
+    height: auto;
+    min-height: 56px;
   }
 
   /* Hide center icons on mobile */
@@ -21,10 +59,31 @@
     display: none;
   }
 
+  /* Sidebar - Mobile: Hidden by default, toggleable */
+  aside.sidebar,
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100vh;
+    width: 100% !important;
+    max-width: 280px;
+    z-index: 50;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  aside.sidebar.open,
+  .sidebar.open {
+    left: 0;
+  }
+
   /* Chat area padding */
   .chat-area {
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   /* Message input adjustments */
@@ -32,17 +91,40 @@
     padding: 0.75rem;
   }
 
+  .message-input-container input {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+
   /* App menu positioning */
   .app-menu-overlay {
     right: 1rem;
+    top: 4rem;
     width: calc(100% - 2rem);
     max-width: 20rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Modal adjustments */
+  .modal-content {
+    padding: 24px 20px;
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .modal-title {
+    font-size: 24px;
+  }
+
+  .social-button {
+    font-size: 14px;
+    padding: 10px 14px;
   }
 }
 
-/* Tablet: 641px - 1024px */
+/* ========== Tablet: 641px - 1024px ========== */
 @media (min-width: 641px) and (max-width: 1024px) {
   /* Sidebar width adjustment */
+  aside.sidebar,
   .sidebar {
     width: 16rem;
   }
@@ -52,11 +134,18 @@
     padding-left: 2rem;
     padding-right: 2rem;
   }
+
+  /* Header */
+  header {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
-/* Desktop: 1025px and above */
+/* ========== Desktop: 1025px and above ========== */
 @media (min-width: 1025px) {
   /* Full desktop layout */
+  aside.sidebar,
   .sidebar {
     width: 18rem;
   }
@@ -67,14 +156,16 @@
   }
 }
 
-/* Large screens: 1440px and above */
+/* ========== Large screens: 1440px and above ========== */
 @media (min-width: 1440px) {
   .chat-area {
     max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
-/* Prevent text size adjustment on iOS */
+/* ========== Prevent text size adjustment on iOS ========== */
 @media screen and (max-width: 640px) {
   input,
   textarea,
@@ -83,12 +174,23 @@
   }
 }
 
-/* Touch-friendly targets */
+/* ========== Touch-friendly targets ========== */
 @media (hover: none) and (pointer: coarse) {
   button,
-  .cursor-pointer {
+  .cursor-pointer,
+  .social-button,
+  .continue-button {
     min-height: 44px;
     min-width: 44px;
+  }
+}
+
+/* ========== Print styles ========== */
+@media print {
+  .modal-overlay,
+  .sidebar,
+  header {
+    display: none;
   }
 }
 

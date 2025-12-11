@@ -1,19 +1,42 @@
-import { ChevronDown, LayoutGrid } from 'lucide-react'
+import { ChevronDown, Menu } from 'lucide-react'
 import { GridIcon } from '../icons/BrandIcons'
 import HeaderIcons from '../ui/HeaderIcons'
 
 /**
  * Header Component
  * Top header bar with title, icons, and profile
+ * Follows MVC pattern:
+ * - Model: Props (showAppMenu, setShowAppMenu, onToggleSidebar)
+ * - View: UI rendering
+ * - Controller: Event handlers
  * @param {boolean} showAppMenu - Whether app menu is visible
  * @param {function} setShowAppMenu - Function to toggle app menu
+ * @param {function} onToggleSidebar - Function to toggle sidebar (mobile)
  */
-const Header = ({ showAppMenu, setShowAppMenu }) => {
+const Header = ({ showAppMenu, setShowAppMenu, onToggleSidebar }) => {
+  // Controller: Event handlers
+  const handleToggleSidebar = () => {
+    if (onToggleSidebar) {
+      onToggleSidebar()
+    }
+  }
+
+  // View: UI rendering
   return (
     <header className="h-16 border-b border-gray-100 flex items-center justify-between px-4 md:px-8 bg-white z-10 flex-shrink-0">
-      <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-md">
-        <span className="font-semibold text-gray-700 text-sm md:text-base">TOAI GPT 7.0</span>
-        <ChevronDown size={18} className="text-gray-500" />
+      <div className="flex items-center gap-2">
+        {/* Mobile menu button */}
+        <button
+          onClick={handleToggleSidebar}
+          className="md:hidden p-2 rounded-md hover:bg-gray-100 mr-2"
+          aria-label="Toggle sidebar"
+        >
+          <Menu size={20} className="text-gray-600" />
+        </button>
+        <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 px-2 py-1 rounded-md">
+          <span className="font-semibold text-gray-700 text-sm md:text-base">TOAI GPT 7.0</span>
+          <ChevronDown size={18} className="text-gray-500" />
+        </div>
       </div>
 
       {/* Center icons row - hidden on mobile */}
